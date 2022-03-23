@@ -25,6 +25,9 @@ karts <- mk_tab[[2]] %>% html_table()
 
 karts <- karts %>%
   row_to_names(row_number = 1)
+
+karts <- karts %>%
+  mutate_at(vars(2:14), as.numeric)
 ```
 
 ## Character Scraping
@@ -35,6 +38,9 @@ chars <- mk_tab[[3]] %>% html_table()
 chars <- chars %>%
   row_to_names(row_number = 1) %>%
   slice(1:n()-1)
+
+chars <- chars %>%
+  mutate_at(vars(2:14), as.numeric)
 ```
 
 ## Wheel Scraping
@@ -44,6 +50,9 @@ wheels <- mk_tab[[4]] %>% html_table()
 
 wheels <- wheels %>%
   row_to_names(row_number = 1)
+
+wheels <- wheels %>%
+  mutate_at(vars(2:14), as.numeric)
 ```
 
 ## Glider Scraping
@@ -53,8 +62,35 @@ glider <- mk_tab[[5]] %>% html_table()
 
 glider <- glider %>%
   row_to_names(row_number = 1)
+
+glider <- glider %>%
+  mutate_at(vars(2:14), as.numeric)
+
 ```
 
+## One character dataset
+
+```{r}
+onechar <- chars %>%
+  slice(1)
+
+onekart <- karts %>%
+  slice(1)
+
+oneglider <- glider %>%
+  slice(1)
+
+onewheels <- wheels %>%
+  slice(1)
+
+selected <- full_join(onekart, onechar)
+selected <-full_join(selected, oneglider)
+selected <- full_join(selected, onewheels)
+
+finalstats = colSums(selected[2:14])
+
+finalstats
+```
 
 
 

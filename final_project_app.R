@@ -10,7 +10,7 @@ ui <- fluidPage(
                                 choices = levels(factor(karts$Body))),
                  selectizeInput(inputId = "wheelselect",
                               label = "Choose Wheels",
-                              choices = levels(factor(wheels$Tire)))
+                              choices = levels(factor(wheels$Tire))),
                  selectizeInput(inputId = "gliderselect",
                                 label = "Choose a Glider",
                                 choices = levels(factor(glider$Glider)))),
@@ -28,21 +28,27 @@ server <- function(input, output, session) {
     karts %>% filter(Body == input$kartselect)
   })
   
+  selected <- reactive({full_join(kartselected, charselected)})
+  
   wheelselected <- reactive({
     wheels %>% filter(Tire == input$wheelselect)
   })
+  
+  selected <- reactive({full_join(selected, wheelselected)})
+  
   
   gliderselected <- reactive({
     glider %>% filter(Glider == input$gliderselect)
   })
   
-  totaldf <- reactive({bind_cols(charselected, gliderselected, kartselected, wheelselected,
-                       c("WG", "AC", "ON", "OF", "MT", "SL", "SW", 
-                         "SA", "SG", "TL", "TW", "TA", "TG"))})
+  selected <-reactive({full_join(selected, gliderselected)})
+  
   
   output$stattable <- renderTable({
     
-    head(totaldf)
+    finalstats = colSums(selected[2:14])
+    
+    finalstats
     
   })
 }
