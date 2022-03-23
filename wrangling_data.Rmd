@@ -1,0 +1,62 @@
+---
+title: "Wrangling Data"
+author: "Patrick Burke"
+date: "3/21/2022"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(rvest)
+##install.packages("janitor")
+library(janitor)
+```
+
+```{r}
+url <- "https://www.mariowiki.com/Mario_Kart_8_Deluxe_in-game_statistics"
+mk <- read_html(url)
+mk_tab <- mk %>% html_nodes("table")
+```
+
+## Kart Scraping
+
+```{r}
+karts <- mk_tab[[2]] %>% html_table()
+
+karts <- karts %>%
+  row_to_names(row_number = 1)
+```
+
+## Character Scraping
+
+```{r}
+chars <- mk_tab[[3]] %>% html_table()
+
+chars <- chars %>%
+  row_to_names(row_number = 1) %>%
+  slice(1:n()-1)
+```
+
+## Wheel Scraping
+
+```{r}
+wheels <- mk_tab[[4]] %>% html_table()
+
+wheels <- wheels %>%
+  row_to_names(row_number = 1)
+```
+
+## Glider Scraping
+
+```{r}
+glider <- mk_tab[[5]] %>% html_table()
+
+glider <- glider %>%
+  row_to_names(row_number = 1)
+```
+
+
+
+
+
+
