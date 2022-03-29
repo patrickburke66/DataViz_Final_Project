@@ -5,3 +5,7 @@ Today I talked with Kassandra about our projects. She plans on making a Shiny ap
 ## March 23
 
 Talked with Dr. Higham about my project as we had an odd number of students in class.
+
+## March 28th
+
+Unfortunately I missed class due to an illness and did not communicate with anyone in class.

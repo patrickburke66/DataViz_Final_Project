@@ -1,55 +1,50 @@
 library(shiny)
+library(tidyverse)
 
 ui <- fluidPage(
+  
+  ## Title
+  titlePanel("Mario Kart 8 Deluxe Character Statistics"),
+  
+  ## All the stuff that'll be on the side
   sidebarLayout(
+    
+    ## Side panel, with the four selections and an action button
     sidebarPanel(selectizeInput(inputId = "charselect",
                                 label = "Choose a Character",
-                                choices = levels(factor(chars$Driver))),
+                                choices = levels(factor(chars$Driver)),
+                                selected = "MarioMro"),
                  selectizeInput(inputId = "kartselect",
                                 label = "Choose a Kart",
-                                choices = levels(factor(karts$Body))),
+                                choices = levels(factor(karts$Body)),
+                                selected = "Standard Kart"),
                  selectizeInput(inputId = "wheelselect",
                               label = "Choose Wheels",
-                              choices = levels(factor(wheels$Tire))),
+                              choices = levels(factor(wheels$Tire)),
+                              selected = "StandardNormal"),
                  selectizeInput(inputId = "gliderselect",
                                 label = "Choose a Glider",
-                                choices = levels(factor(glider$Glider)))),
-    mainPanel(tableOutput("stattable"))
+                                choices = levels(factor(glider$Glider)),
+                                selected = "Super Glider")),
+    
+    ## The output of the table to the center of the app.
+    mainPanel(tableOutput("stattable")
+    )
   )
 )
 
 server <- function(input, output, session) {
   
-  charselected <- reactive({
-    chars %>% filter(Driver == input$charselect)
-  })
-  
-  kartselected <- reactive({
-    karts %>% filter(Body == input$kartselect)
-  })
-  
-  selected <- reactive({full_join(kartselected, charselected)})
-  
-  wheelselected <- reactive({
-    wheels %>% filter(Tire == input$wheelselect)
-  })
-  
-  selected <- reactive({full_join(selected, wheelselected)})
-  
-  
-  gliderselected <- reactive({
-    glider %>% filter(Glider == input$gliderselect)
-  })
-  
-  selected <-reactive({full_join(selected, gliderselected)})
+  selected <- reactive({
+    mkfull %>%
+      filter(Driver == input$charselect | Glider == input$gliderselect 
+             | Tire == input$wheelselect | Body == input$kartselect)})
   
   
   output$stattable <- renderTable({
     
-    finalstats = colSums(selected[2:14])
-    
-    finalstats
-    
+    finalstats <- colSums(selected()[2:14])
+    tibble(finalstats)
   })
 }
 

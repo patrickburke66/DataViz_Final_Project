@@ -68,26 +68,22 @@ glider <- glider %>%
 
 ```
 
+## Big dataset
+```{r}
+mkfull <- full_join(karts, chars)
+mkfull <-full_join(mkfull, glider)
+mkfull <- full_join(mkfull, wheels)
+```
+
+
 ## One character dataset
 
 ```{r}
-onechar <- chars %>%
-  slice(1)
+selected <- mkfull %>%
+  filter(Driver == "Koopa TroopaNok" | Glider == "Parachute" 
+         | Tire == "StandardNormal" | Body == "Landship")
 
-onekart <- karts %>%
-  slice(1)
-
-oneglider <- glider %>%
-  slice(1)
-
-onewheels <- wheels %>%
-  slice(1)
-
-selected <- full_join(onekart, onechar)
-selected <-full_join(selected, oneglider)
-selected <- full_join(selected, onewheels)
-
-finalstats = colSums(selected[2:14])
+finalstats <- colSums(selected[2:14])
 
 finalstats
 ```
