@@ -28,8 +28,9 @@ ui <- fluidPage(
                                 selected = "Super Glider")),
     
     ## The output of the table to the center of the app.
-    mainPanel(tableOutput("stattable")
-              #plotOutput("statgraph")
+    tabsetPanel(
+      tabPanel("Table", tableOutput("stattable")),
+      tabPanel("Table2", plotOutput("statgraph"))
     )
   )
 )
@@ -44,15 +45,16 @@ server <- function(input, output, session) {
   
   output$stattable <- renderTable({
     
-    finalstats <- colSums(selected()[2:14])
+    finalstats <- data.frame(t(colSums(selected()[2:14])))  
     tibble(finalstats)
   })
   
-  #output$statgraph({
+  output$statgraph <- renderPlot({
+    ggplot(finalstats) +
+      geom_bar()
     
-    #ggplot(colSums(selected()[2:14]),)
-    
-  #})
+  })
+  
 }
 
 shinyApp(ui, server)

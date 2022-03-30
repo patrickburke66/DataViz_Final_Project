@@ -41,7 +41,30 @@ chars <- chars %>%
 
 chars <- chars %>%
   mutate_at(vars(2:14), as.numeric)
+
+chars <- chars %>%
+  mutate(Driver = substr(Driver, 1, nchar(Driver)-3))
+
+
+chars$Driver[14] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[15] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[17] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[18] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[19] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[20] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[21] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[22] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[30] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[31] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[35] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[36] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[38] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[40] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[42] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[43] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
 ```
+This is an extremely ineffecient way to make this work. I plan on finding a better way, as I am going to have to do this for the other the dataframes as well.
+
 
 ## Wheel Scraping
 
@@ -82,11 +105,20 @@ mkfull <- full_join(mkfull, wheels)
 selected <- mkfull %>%
   filter(Driver == "Koopa TroopaNok" | Glider == "Parachute" 
          | Tire == "StandardNormal" | Body == "Landship")
-
-finalstats <- colSums(selected[2:14])
-
-finalstats
 ```
+
+## World record scraping
+
+```{r}
+url2 <- "https://mkwrs.com/mk8dx/wrs.php?date=0"
+wr <- read_html(url2)
+wr_tab <- wr %>% html_nodes("table")
+```
+
+```{r}
+worldrecords <- wr_tab[[2]] %>% html_table()
+```
+
 
 
 

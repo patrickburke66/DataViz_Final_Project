@@ -9,3 +9,7 @@ Talked with Dr. Higham about my project as we had an odd number of students in c
 ## March 28th
 
 Unfortunately I missed class due to an illness and did not communicate with anyone in class.
+
+## March 30
+
+Today I talked with James about his tennis dataset and his plans for his project. James has a super cool data set with different ways to code each unique outcome in a tennis match. He plans on finding ways to use this to see which players use certain strategies. I found this super interesting partially because I love tennis. I think he has a good plan moving forward. We also discussed some problems he ran into trying to tidy the data and remove some values. from the data set.

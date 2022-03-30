@@ -23,5 +23,8 @@ This push is coming a day late as I was sick for class on the 28th. I have worke
 
 I have  began to add the bar plot I plan to have demonstrating the values in the table. A bar plot is what shows up in the in-game character selector, but it is small and you can not really analyze it other than comparing sizes of bars. I have an idea of how I want this graph to be in, using the dataset _before_ I sum the columns, but currently I have still not gotten it to work.
 
+### End of class
+
+Today in class I accomplished a few different tasks. First was I was able to get labels on my table and have it formatted as I initially desired. Secondly, I was able to create two separate tabs for my Shiny app which is how I eventually want my final to look. I also began initializing a graph, which I still am trouble shooting. I also read in a new data set, which shows the world records for each course and kart combinations. Hopefully I can have that data set incoorperated into my Shiny app by next class. It will require me to tidy up a lot of the entries though, which I did accomplish some of in class.
 
 
