@@ -16,3 +16,12 @@ Edited my data to begin to make the static table, which I want showing up as a r
 
 This push is coming a day late as I was sick for class on the 28th. I have worked on my project to get the reactive table to display. I am still working and attempting to better format this table as well as try to add a reactive graph into my app. At the moment the table works exactly how I want it to apart from the fact it does not display the column names for each variable. 
 
+
+## March 30
+
+### Beginning of class
+
+I have  began to add the bar plot I plan to have demonstrating the values in the table. A bar plot is what shows up in the in-game character selector, but it is small and you can not really analyze it other than comparing sizes of bars. I have an idea of how I want this graph to be in, using the dataset _before_ I sum the columns, but currently I have still not gotten it to work.
+
+
+

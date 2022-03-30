@@ -29,6 +29,7 @@ ui <- fluidPage(
     
     ## The output of the table to the center of the app.
     mainPanel(tableOutput("stattable")
+              #plotOutput("statgraph")
     )
   )
 )
@@ -46,6 +47,12 @@ server <- function(input, output, session) {
     finalstats <- colSums(selected()[2:14])
     tibble(finalstats)
   })
+  
+  #output$statgraph({
+    
+    #ggplot(colSums(selected()[2:14]),)
+    
+  #})
 }
 
 shinyApp(ui, server)
