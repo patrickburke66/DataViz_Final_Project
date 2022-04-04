@@ -30,7 +30,8 @@ ui <- fluidPage(
     ## The output of the table to the center of the app.
     tabsetPanel(
       tabPanel("Table", tableOutput("stattable")),
-      tabPanel("Table2", plotOutput("statgraph"))
+      tabPanel("Table2", plotOutput("statgraph")),
+      tabPanel("Table3", tableOutput("worldrecordtab"))
     )
   )
 )
@@ -45,14 +46,18 @@ server <- function(input, output, session) {
   
   output$stattable <- renderTable({
     
-    finalstats <- data.frame(t(colSums(selected()[2:14])))  
+    finalstats <- data.frame(t(colSums(selected()[1:15])))  
     tibble(finalstats)
   })
   
   output$statgraph <- renderPlot({
-    ggplot(finalstats) +
+    ggplot(finalstats, aes(x = Body)) +
       geom_bar()
     
+  })
+  
+  output$worldrecordtab <- renderTable({
+    tibble(worldrecords)
   })
   
 }

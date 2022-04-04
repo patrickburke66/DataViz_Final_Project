@@ -117,6 +117,10 @@ wr_tab <- wr %>% html_nodes("table")
 
 ```{r}
 worldrecords <- wr_tab[[2]] %>% html_table()
+
+worldrecords <- worldrecords %>%
+  subset(select = (-c(4,11)))
+  
 ```
 
 

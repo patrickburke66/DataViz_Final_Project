@@ -25,6 +25,10 @@ I have  began to add the bar plot I plan to have demonstrating the values in the
 
 ### End of class
 
-Today in class I accomplished a few different tasks. First was I was able to get labels on my table and have it formatted as I initially desired. Secondly, I was able to create two separate tabs for my Shiny app which is how I eventually want my final to look. I also began initializing a graph, which I still am trouble shooting. I also read in a new data set, which shows the world records for each course and kart combinations. Hopefully I can have that data set incoorperated into my Shiny app by next class. It will require me to tidy up a lot of the entries though, which I did accomplish some of in class.
+Today in class I accomplished a few different tasks. First was I was able to get labels on my table and have it formatted as I initially desired. Secondly, I was able to create two separate tabs for my Shiny app which is how I eventually want my final to look. I also began initializing a graph, which I still am trouble shooting. I also read in a new data set, which shows the world records for each course and kart combinations. Hopefully I can have that data set incorporated into my Shiny app by next class. It will require me to tidy up a lot of the entries though, which I did accomplish some of in class.
 
+## April 4
 
+## Beginning of Class
+
+My updates from this weekend of work include fully reading in and tidying the World Record data. I also added another tab which included the World Record data table. I also added the data into my geom_bar(), but it still is unresponsive. I know that I have a poor approach at the graph right now, however my priority is to first fix all of my tables. Adding the World Record table lead to problems in my other two tabs, which I have spent the last majority of my time trying to fix.
