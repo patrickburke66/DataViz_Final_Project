@@ -1,0 +1,103 @@
+---
+title: "wrangling data 1.0"
+author: "Patrick Burke"
+date: "4/4/2022"
+output: html_document
+---
+```{r}
+url <- "https://www.mariowiki.com/Mario_Kart_8_Deluxe_in-game_statistics"
+mk <- read_html(url)
+mk_tab <- mk %>% html_nodes("table")
+```
+
+## Kart Scraping
+
+```{r}
+karts <- mk_tab[[2]] %>% html_table()
+
+karts <- karts %>%
+  row_to_names(row_number = 1)
+
+karts <- karts %>%
+  mutate_at(vars(2:14), as.numeric)
+```
+
+## Character Scraping
+
+```{r}
+chars <- mk_tab[[3]] %>% html_table()
+
+chars <- chars %>%
+  row_to_names(row_number = 1) %>%
+  slice(1:n()-1)
+
+chars <- chars %>%
+  mutate_at(vars(2:14), as.numeric)
+
+chars <- chars %>%
+  mutate(Driver = substr(Driver, 1, nchar(Driver)-3))
+
+
+chars$Driver[14] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[15] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[17] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[18] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[19] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[20] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[21] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[22] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[30] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[31] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[35] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[36] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[38] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[40] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[42] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+chars$Driver[43] = substr(chars$Driver[14], 1, nchar(chars$Driver[14])-3)
+```
+This is an extremely ineffecient way to make this work. I plan on finding a better way, as I am going to have to do this for the other the dataframes as well.
+
+
+## Wheel Scraping
+
+```{r}
+wheels <- mk_tab[[4]] %>% html_table()
+
+wheels <- wheels %>%
+  row_to_names(row_number = 1)
+
+wheels <- wheels %>%
+  mutate_at(vars(2:14), as.numeric)
+```
+
+## Glider Scraping
+
+```{r}
+glider <- mk_tab[[5]] %>% html_table()
+
+glider <- glider %>%
+  row_to_names(row_number = 1)
+
+glider <- glider %>%
+  mutate_at(vars(2:14), as.numeric)
+
+```
+
+## Big dataset
+```{r}
+mkfull <- full_join(karts, chars)
+mkfull <-full_join(mkfull, glider)
+mkfull <- full_join(mkfull, wheels)
+```
+
+
+## One character dataset
+
+```{r}
+selected <- mkfull %>%
+  filter(Driver == "Koopa Troopa" | Glider == "Parachute" 
+         | Tire == "StandardNormal" | Body == "Landship")
+```
+
+
+## This is a dead page. I am most likely done updating this as I have found data which I believe to be tidier. I am keeping this data here in case I need to come back to use this dataset or view the old changes I had made.

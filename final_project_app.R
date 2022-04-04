@@ -12,53 +12,67 @@ ui <- fluidPage(
     ## Side panel, with the four selections and an action button
     sidebarPanel(selectizeInput(inputId = "charselect",
                                 label = "Choose a Character",
-                                choices = levels(factor(chars$Driver)),
+                                choices = levels(factor(charactersNew$Character)),
                                 selected = "MarioMro"),
                  selectizeInput(inputId = "kartselect",
                                 label = "Choose a Kart",
-                                choices = levels(factor(karts$Body)),
+                                choices = levels(factor(bodiesNew$Karts)),
                                 selected = "Standard Kart"),
                  selectizeInput(inputId = "wheelselect",
                               label = "Choose Wheels",
-                              choices = levels(factor(wheels$Tire)),
+                              choices = levels(factor(tiresNew$Tires)),
                               selected = "StandardNormal"),
                  selectizeInput(inputId = "gliderselect",
                                 label = "Choose a Glider",
-                                choices = levels(factor(glider$Glider)),
+                                choices = levels(factor(glidersNew$Gliders)),
                                 selected = "Super Glider")),
-    
-    ## The output of the table to the center of the app.
-    tabsetPanel(
-      tabPanel("Table", tableOutput("stattable")),
-      tabPanel("Table2", plotOutput("statgraph")),
-      tabPanel("Table3", tableOutput("worldrecordtab"))
+    mainPanel(
+      ## The output of the table to the center of the app.
+      tabsetPanel(
+        tabPanel("Table", tableOutput("stattable")),
+        tabPanel("Table2", plotOutput("statgraph")),
+        tabPanel("Table3", tableOutput("worldrecordtable"))
+      )
     )
+
   )
 )
 
 server <- function(input, output, session) {
   
   selected <- reactive({
-    mkfull %>%
-      filter(Driver == input$charselect | Glider == input$gliderselect 
-             | Tire == input$wheelselect | Body == input$kartselect)})
+    mkfullNew %>%
+      filter(Character == input$charselect | Gliders == input$gliderselect 
+             | Tires == input$wheelselect | Karts == input$kartselect)})
+  
+  combo <- reactive({
+    c(selected()$Character, selected()$Tires, selected()$Gliders, selected()$Karts)})
+  
+  new <- reactive({
+    data.frame(combo()) %>%
+    drop_na()})
   
   
   output$stattable <- renderTable({
-    
-    finalstats <- data.frame(t(colSums(selected()[1:15])))  
+    finalstats <- data.frame(t(colSums(selected()[2:13])))  
     tibble(finalstats)
   })
   
+  output$total <- 
+  
   output$statgraph <- renderPlot({
-    ggplot(finalstats, aes(x = Body)) +
+    ggplot(finalstats, aes()) +
       geom_bar()
     
   })
   
-  output$worldrecordtab <- renderTable({
+  output$worldrecordtable <- renderTable({
     tibble(worldrecords)
   })
+  
+  output$combotable <- renderTable({
+    tibble(new())},
+    caption = "Current Selection:", caption.placement = "top")
   
 }
 

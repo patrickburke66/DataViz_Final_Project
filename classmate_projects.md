@@ -13,3 +13,7 @@ Unfortunately I missed class due to an illness and did not communicate with anyo
 ## March 30
 
 Today I talked with James about his tennis dataset and his plans for his project. James has a super cool data set with different ways to code each unique outcome in a tennis match. He plans on finding ways to use this to see which players use certain strategies. I found this super interesting partially because I love tennis. I think he has a good plan moving forward. We also discussed some problems he ran into trying to tidy the data and remove some values. from the data set.
+
+## April 4
+
+I talked with Clara about her brewery project. She has an extremely well working shiny app that is very aesthetically pleasing. She has nice interactive maps as well as multiple tabs showing different graphs and ideas for her graphs. I found some inspiration in hers, as I liked the way she wrote a nice intro on one of her sidebars. We also discussed possibly bringing in a different dataset to try and make one of her tabs a little but more entertaining/interactive.
