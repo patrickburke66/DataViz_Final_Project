@@ -61,7 +61,7 @@ server <- function(input, output, session) {
   output$total <- 
   
   output$statgraph <- renderPlot({
-    ggplot(finalstats, aes()) +
+    ggplot(mkfullNew, aes(x = Type)) +
       geom_bar()
     
   })

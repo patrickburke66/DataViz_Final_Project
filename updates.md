@@ -37,3 +37,9 @@ My updates from this weekend of work include fully reading in and tidying the Wo
 
 I had a very productive day in class. I found a new dataset with the same information, but requires less tidying and has better column names. This also allowed me to fix a few bugs with one of my tables. I am still stumped on how to get the summarized columns into a graph, but my goal for class on Wednesday is to have a fully functional Shiny app with a graph output in the second tab.
 
+
+## April 6
+
+## Beginning of Class
+
+My updates for the beginning of class commit include editing and combining my new data frames, reading the data for the world records, and trying to find a way to combine them. Most of this work came outside of my Shiny app, trouble shooting instead of adding new features to my app. 

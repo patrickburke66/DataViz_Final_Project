@@ -51,6 +51,9 @@ charactersNew <- read_csv("characters.csv")
 mkfullNew <- full_join(bodiesNew, charactersNew)
 mkfullNew <-full_join(mkfullNew, glidersNew)
 mkfullNew <- full_join(mkfullNew, tiresNew)
+
+#wrcombined <- right_join(worldrecords, mkfullNew)
+
 ```
 
 
