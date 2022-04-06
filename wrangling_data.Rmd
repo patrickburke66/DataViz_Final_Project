@@ -51,6 +51,22 @@ charactersNew <- read_csv("characters.csv")
 mkfullNew <- full_join(bodiesNew, charactersNew)
 mkfullNew <-full_join(mkfullNew, glidersNew)
 mkfullNew <- full_join(mkfullNew, tiresNew)
+```
+
+```{r}
+selected <- mkfullNew %>% 
+  filter(Character == "Mario" | Gliders == "Plane" 
+             | Tires == "Azure Roller" | Karts == "Standard Kart")
+
+
+finalstats = data.frame(value=apply(selected[2:13],2,sum))
+
+finalstats <- finalstats %>%
+  mutate(key = rownames(finalstats))
+
+ggplot(data = finalstats, aes(x=value, y = key)) +
+  geom_col(colour="yellow", fill = "gold")
+
 
 #wrcombined <- right_join(worldrecords, mkfullNew)
 

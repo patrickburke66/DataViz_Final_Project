@@ -10,6 +10,7 @@ Got all of the data in and began to create an idea for a shiny app, as well as t
 
 ### End of Class
 
+Today I got a working graph and a plan on how to make the graph work in the Shiny app. I finally figured out the strategy of turning the row names to acolumn in order to make the bar chart functionable. From this, I tried to get it into my shiny app but ran into trouble with the reactive settings when turning these row names into a column. I hope to overcome this problem and be able to run my shiny app without receiving error messages.
 Edited my data to begin to make the static table, which I want showing up as a reactive table in my shiny app. I also brainstormed other ideas to include in my final project, such as graphs to show and presenting the tracks which the chosen combination is optimized for. My goal is to be able to show some sort of reactive table by in time for class on Monday, 3/28.
 
 ## March 29

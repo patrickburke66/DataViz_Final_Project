@@ -40,29 +40,35 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   
+  
   selected <- reactive({
     mkfullNew %>%
       filter(Character == input$charselect | Gliders == input$gliderselect 
              | Tires == input$wheelselect | Karts == input$kartselect)})
   
+
+  finalstats=reactive({data.frame(value=apply(selected[2:13],2,sum))})
+  
+  finalstats <- finalstats %>% reactive({
+    mutate(key = rownames(finalstats))})
+    
+  
   combo <- reactive({
-    c(selected()$Character, selected()$Tires, selected()$Gliders, selected()$Karts)})
+    c(selected()$Character, selected()$Tires, 
+      selected()$Gliders, selected()$Karts)})
   
   new <- reactive({
     data.frame(combo()) %>%
-    drop_na()})
-  
+      drop_na()})
   
   output$stattable <- renderTable({
-    finalstats <- data.frame(t(colSums(selected()[2:13])))  
-    tibble(finalstats)
+    tibble(finalstats())
   })
   
-  output$total <- 
   
   output$statgraph <- renderPlot({
-    ggplot(mkfullNew, aes(x = Type)) +
-      geom_bar()
+    ggplot(data = finalstats(), aes(x=value, y = key)) +
+      geom_col(colour="yellow", fill = "gold")
     
   })
   
@@ -71,9 +77,7 @@ server <- function(input, output, session) {
   })
   
   output$combotable <- renderTable({
-    tibble(new())},
-    caption = "Current Selection:", caption.placement = "top")
-  
-}
+    tibble(new())})
 
+}
 shinyApp(ui, server)

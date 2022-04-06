@@ -17,3 +17,7 @@ Today I talked with James about his tennis dataset and his plans for his project
 ## April 4
 
 I talked with Clara about her brewery project. She has an extremely well working shiny app that is very aesthetically pleasing. She has nice interactive maps as well as multiple tabs showing different graphs and ideas for her graphs. I found some inspiration in hers, as I liked the way she wrote a nice intro on one of her sidebars. We also discussed possibly bringing in a different dataset to try and make one of her tabs a little but more entertaining/interactive.
+
+## April 6
+
+I talked with Grace about her project. Grace is doing a blog which is analyzing the water contamination levels per county in California. I think this should be a super interesting topic to analyze how the different aspects of each county affect the water contamination. She showed me an interesting graph which showed the population vs. the water contamination levels which showed a relationship as the population is highter the water contamination levels are as well. She said her main problems were formatting graphs and solving small problems with the graphs' functionality.
