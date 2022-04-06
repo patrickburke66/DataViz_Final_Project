@@ -10,8 +10,6 @@ Got all of the data in and began to create an idea for a shiny app, as well as t
 
 ### End of Class
 
-I had a very productive day in class. I found a new dataset with the same information, but requires less tidying and has better column names. This also allowed me to fix a few bugs with one of my tables. I am still stumped on how to get the summarized columns into a graph, but my goal for class on Wednesday is to have a fully functional Shiny app with a graph output in the second tab.
-
 Edited my data to begin to make the static table, which I want showing up as a reactive table in my shiny app. I also brainstormed other ideas to include in my final project, such as graphs to show and presenting the tracks which the chosen combination is optimized for. My goal is to be able to show some sort of reactive table by in time for class on Monday, 3/28.
 
 ## March 29
@@ -34,3 +32,8 @@ Today in class I accomplished a few different tasks. First was I was able to get
 ## Beginning of Class
 
 My updates from this weekend of work include fully reading in and tidying the World Record data. I also added another tab which included the World Record data table. I also added the data into my geom_bar(), but it still is unresponsive. I know that I have a poor approach at the graph right now, however my priority is to first fix all of my tables. Adding the World Record table lead to problems in my other two tabs, which I have spent the last majority of my time trying to fix.
+
+## End of Class
+
+I had a very productive day in class. I found a new dataset with the same information, but requires less tidying and has better column names. This also allowed me to fix a few bugs with one of my tables. I am still stumped on how to get the summarized columns into a graph, but my goal for class on Wednesday is to have a fully functional Shiny app with a graph output in the second tab.
+
