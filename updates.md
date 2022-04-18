@@ -49,4 +49,10 @@ My updates for the beginning of class commit include editing and combining my ne
 
 ## Class Commit
 
-I spent a lot of time attempting to 
+I spent a lot of time attempting to add images into my shiny app. Unfortunately at the moment they are still not displaying. This also caused a many crashes and failure to run in my Shiny App, creating a lot of trouble shooting.
+
+## April 18
+
+## Before Class Commit
+
+Today my commit has edits on the initial table, as well as attempted changes to the layout of my Shiny App, however it was not functioning for many of them. I was attempting to create a `fixedPage` as opposed to a `fluidPage` as I thought that may fix the width of my table. Unfortunately that did not work so I reverted it back. I also attempted to pivot the table displaying the stats in order to allow the viewer to see the whole table. Before, it had a wide table which required the viewer to have to scroll to view all of the statistics. This pivot was working for me in my `wrangling_data.rmd`, but I am running into troubles with the reactive dataframe in the shiny app.

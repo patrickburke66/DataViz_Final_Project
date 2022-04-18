@@ -8,6 +8,8 @@ output: html_document
 ```{r}
 library(tidyverse)
 library(rvest)
+##install.packages("shinythemes")
+library(shinythemes)
 ##install.packages("janitor")
 library(janitor)
 ```
@@ -51,6 +53,15 @@ charactersNew <- read_csv("characters.csv")
 mkfullNew <- full_join(bodiesNew, charactersNew)
 mkfullNew <-full_join(mkfullNew, glidersNew)
 mkfullNew <- full_join(mkfullNew, tiresNew)
+
+selected <- mkfullNew %>%
+  filter(Karts == "Standard Kart" | Character == "Mario" |
+         Gliders == "Super" | Tires == "Standard")
+
+finalstats <- data.frame(t(colSums(selected[2:13])))
+  
+finalstats <- finalstats %>%
+  pivot_longer(cols = c(1:12), names_to = "Stats", values_to = "Rating") 
 ```
 
 

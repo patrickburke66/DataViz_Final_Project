@@ -1,5 +1,6 @@
 library(shiny)
 library(tidyverse)
+library(shinythemes)
 
 
 ui <- fluidPage(
@@ -7,7 +8,7 @@ ui <- fluidPage(
   ## Title
   titlePanel(
     textOutput("Mario Kart 8 Statistics")
-
+    
   ),
   
   ## All the stuff that'll be on the side
@@ -31,6 +32,7 @@ ui <- fluidPage(
                                 choices = levels(factor(glidersNew$Gliders)),
                                 selected = "Super Glider"),
                  numericInput('m', 'Select Kart 1 or 2', 1, min = 1, max = 2),),
+
     mainPanel(
       ## The output of the table to the center of the app.
       tabsetPanel(
@@ -42,18 +44,20 @@ ui <- fluidPage(
         tableOutput("combotable"),
         uiOutput("test")
       )
-    )
-    
+    ) 
   )
 )
 
+
 server <- function(input, output, session) {
   
+  ## Create a reactive df of the current selection for statistics.
   selected <- reactive({
     mkfullNew %>%
       filter(Character == input$charselect | Gliders == input$gliderselect 
              | Tires == input$wheelselect | Karts == input$kartselect)})
   
+  ## Create another df of the current selection to display current cart selection.
   combo <- reactive({
     c(selected()$Character, selected()$Tires, selected()$Gliders, selected()$Karts)})
   
@@ -61,28 +65,36 @@ server <- function(input, output, session) {
     data.frame(combo()) %>%
       drop_na()})
   
+  ## Convert finalstats into summed dataframe.
+  finalstats <- data.frame(t(colSums(selected()[2:13]))) 
+  
+  finalstats <- finalstats %>%
+    pivot_longer(cols = c(1:12), names_to = "Stats", values_to = "Rating") 
+  
+  ## Output for images.
   output$test <- renderUI({
     images <- c("StandardKartBodyMK8.png",
                 "PipeFrameBodyMK8.png")
     tags$img(src= images[input$m])})
   
-  
+  ## Output for stats table.
   output$stattable <- renderTable({
-    finalstats <- data.frame(t(colSums(selected()[2:13])))  
     tibble(finalstats)
-  })
+  },type = "html", bordered = TRUE, striped = TRUE, 
+  spacing = "xs", digits = 0)
   
-
-    output$statgraph <- renderPlot({
+  ## Output for stats graph.
+  output$statgraph <- renderPlot({
       ggplot(finalstats, aes()) +
         geom_bar()
       
     })
-  
+  ## Output for world records.
   output$worldrecordtable <- renderTable({
     tibble(worldrecords)
   })
   
+  ## Output which shows the current selection.
   output$combotable <- renderTable({
     tibble(new())},
     caption = "Current Selection:", caption.placement = "top")
