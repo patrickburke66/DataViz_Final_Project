@@ -10,6 +10,7 @@ Got all of the data in and began to create an idea for a shiny app, as well as t
 
 ### End of Class
 
+
 Today I got a working graph and a plan on how to make the graph work in the Shiny app. I finally figured out the strategy of turning the row names to a column in order to make the bar chart functionable. From this, I tried to get it into my shiny app but ran into trouble with the reactive settings when turning these row names into a column. I hope to overcome this problem and be able to run my shiny app without receiving error messages.
 Edited my data to begin to make the static table, which I want showing up as a reactive table in my shiny app. I also brainstormed other ideas to include in my final project, such as graphs to show and presenting the tracks which the chosen combination is optimized for. My goal is to be able to show some sort of reactive table by in time for class on Monday, 3/28.
 
@@ -56,3 +57,7 @@ I spent a lot of time attempting to add images into my shiny app. Unfortunately 
 ## Before Class Commit
 
 Today my commit has edits on the initial table, as well as attempted changes to the layout of my Shiny App, however it was not functioning for many of them. I was attempting to create a `fixedPage` as opposed to a `fluidPage` as I thought that may fix the width of my table. Unfortunately that did not work so I reverted it back. I also attempted to pivot the table displaying the stats in order to allow the viewer to see the whole table. Before, it had a wide table which required the viewer to have to scroll to view all of the statistics. This pivot was working for me in my `wrangling_data.rmd`, but I am running into troubles with the reactive dataframe in the shiny app.
+
+## End of Class Commit
+
+Today I played around a lot with my shiny app. I got my table to display as I had discussed in my before class commit. I also decided to create another shiny app to test out different layouts. This allowed me to add both the graph and the table showing at the same time. It also allowed me to add the table directly below the `selectizeInput`, which I think could be cool as I could add a bunch of different options in the main panel while always showing the total stats for the selection in the bottom left.

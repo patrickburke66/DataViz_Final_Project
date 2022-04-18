@@ -62,6 +62,11 @@ finalstats <- data.frame(t(colSums(selected[2:13])))
   
 finalstats <- finalstats %>%
   pivot_longer(cols = c(1:12), names_to = "Stats", values_to = "Rating") 
+
+colnames(mkfullNew)<- c("Type", "Combined Speed","Water Speed", "Air Speed",
+                        "Ground Speed", "Acceleration", "Weight", "Combined Handling",
+                        "Water Handling","Air Handling", "Ground Handling", "Traction",
+                        "Mini Turbo","Karts", "Class", "Character", "Gliders", "Tires")  
 ```
 
 

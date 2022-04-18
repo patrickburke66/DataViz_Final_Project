@@ -21,3 +21,7 @@ I talked with Clara about her brewery project. She has an extremely well working
 ## April 6
 
 I talked with Grace about her project. Grace is doing a blog which is analyzing the water contamination levels per county in California. I think this should be a super interesting topic to analyze how the different aspects of each county affect the water contamination. She showed me an interesting graph which showed the population vs. the water contamination levels which showed a relationship as the population is highter the water contamination levels are as well. She said her main problems were formatting graphs and solving small problems with the graphs' functionality.
+
+## April 18 
+
+I talked with Grace again about her project. First she talked about how she had spent a lot of time joining two data frames and making sure everything was accurately moving over. This was complicate because she had to change some variables to match case in the join. She also showed me a map she made and how she planned on adding colors based on certain variables, like a heat map.
