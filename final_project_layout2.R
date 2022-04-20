@@ -3,8 +3,6 @@ library(tidyverse)
 library(shinythemes)
 
 
-
-
 ui <- fluidPage(
   titlePanel("Mario Kart 8 Statistics"),
   
@@ -25,15 +23,16 @@ ui <- fluidPage(
            selectizeInput(inputId = "gliderselect",
                           label = "Choose a Glider",
                           choices = levels(factor(glidersNew$Gliders)),
-                          selected = "Super")),
+                          selected = "Super"))
            
-    column(8,plotOutput("statgraph"))
-          ),
+
+        ),
   
   fluidRow(
-    column(4, tableOutput("stattable"))
+    column(4, tableOutput("stattable")),
+    column(8,plotOutput("statgraph")
     )
-
+  )
 )
   
 server <- function(input, output, session) {
@@ -70,7 +69,8 @@ server <- function(input, output, session) {
   ## Output for stats table.
   output$stattable <- renderTable({
     tibble(display_table())
-  },type = "html", bordered = TRUE, striped = TRUE, 
+  }, caption = "Current Selection:", caption.placement = "top",
+  type = "html", bordered = TRUE, striped = TRUE, 
   spacing = "xs", digits = 2)
   
   ## Output for stats graph.
@@ -78,9 +78,10 @@ server <- function(input, output, session) {
     ggplot(display_table(), aes(x = Stats, y = Rating)) +
       geom_col(fill = "darkgoldenrod1", color = "darkgoldenrod3") +
       coord_flip() +
-      ylim(0, 5.75)
+      ylim(0, 5.75) +
+      labs(title = "Current Selection:")
     
-  })
+  }, height = 250, width = 375)
   ## Output for world records.
   output$worldrecordtable <- renderTable({
     tibble(worldrecords)

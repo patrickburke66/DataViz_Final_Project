@@ -61,3 +61,7 @@ Today my commit has edits on the initial table, as well as attempted changes to 
 ## End of Class Commit
 
 Today I played around a lot with my shiny app. I got my table to display as I had discussed in my before class commit. I also decided to create another shiny app to test out different layouts. This allowed me to add both the graph and the table showing at the same time. It also allowed me to add the table directly below the `selectizeInput`, which I think could be cool as I could add a bunch of different options in the main panel while always showing the total stats for the selection in the bottom left.
+
+## April 20
+
+Today I changed my shiny apps layout for the primary version I made. Now it still ahs the tab panel but also is constantly demonstrating the stats of the characters, no matter what tab you are on. I plan to spend this weekend finishing and adding tabs. Optimal tracks based on kart, head to head kart comparison, and random kart generator -- based on certain selected parameters.

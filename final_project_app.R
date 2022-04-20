@@ -28,9 +28,9 @@ ui <- fluidPage(
                                 label = "Choose a Glider",
                                 choices = levels(factor(glidersNew$Gliders)),
                                 selected = "Super"),
+                 h4("Total Statistics"), tableOutput("stattable")
                  ),
-    wellPanel(
-      h4("Total Statistics"), tableOutput("stattable"),
+  
 
     mainPanel(
       ## The output of the table to the center of the app.
@@ -44,7 +44,7 @@ ui <- fluidPage(
 
     ) 
   )
-)
+
 
 
 server <- function(input, output, session) {
@@ -87,10 +87,11 @@ server <- function(input, output, session) {
 ## Output for stats graph.
   output$statgraph <- renderPlot({
       ggplot(display_table(), aes(x = Stats, y = Rating)) +
-        geom_col(aes(fill = "gold")) +
-        coord_flip()
-      
+        geom_col(fill = "darkgoldenrod1", color = "darkgoldenrod3") +
+        coord_flip() +
+        ylim(0, 5.75)
     })
+  
 ## Output for world records.
   output$worldrecordtable <- renderTable({
     tibble(worldrecords)
