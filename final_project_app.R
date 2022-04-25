@@ -8,42 +8,40 @@ ui <- fluidPage(
   ## Title
   titlePanel("Mario Kart 8 Statistics"),
   
-  ## All the stuff that'll be on the side
-  sidebarLayout(
-    
-    ## Side panel, with the four selections and an action button
-    sidebarPanel(selectizeInput(inputId = "charselect",
-                                label = "Choose a Character",
-                                choices = levels(factor(charactersNew$Character)),
-                                selected = "Mario"),
-                 selectizeInput(inputId = "kartselect",
-                                label = "Choose a Kart",
-                                choices = levels(factor(bodiesNew$Karts)),
-                                selected = "Standard Kart"),
-                 selectizeInput(inputId = "wheelselect",
-                                label = "Choose Wheels",
-                                choices = levels(factor(tiresNew$Tires)),
-                                selected = "Standard"),
-                 selectizeInput(inputId = "gliderselect",
-                                label = "Choose a Glider",
-                                choices = levels(factor(glidersNew$Gliders)),
-                                selected = "Super"),
-                 h4("Total Statistics"), tableOutput("stattable")
-                 ),
-  
-
     mainPanel(
       ## The output of the table to the center of the app.
       tabsetPanel(
-        tabPanel("Kart Statistics - Graph", plotOutput("statgraph")),
-        tabPanel("World Records", tableOutput("worldrecordtable"))
-      )
-        #(p("This is an app to test out different combinations for Mario Kart 8 deluxe. In this app, you can select your Character, Kart, Tires, and Glider on the left hand side. Each of our different tabs includes statistics and information about your selection. You can also navigate to the Random Kart selector. All Mario Kart statistics have a minimum of 0.75 and a maximum of 5.75. All of the characters begin with base statistics. Changing the Kart, Tires, or Glider changes can effect each of these statistics positively or negatively. Enjoy!")
-         #)
+        tabPanel("Kart Statistics - Graph", 
+                 fluidRow(
+                   column(3,
+                          selectizeInput(inputId = "charselect",
+                                                      label = "Choose a Character",
+                                                      choices = levels(factor(charactersNew$Character)),
+                                                      selected = "Mario"),
+                                       selectizeInput(inputId = "kartselect",
+                                                      label = "Choose a Kart",
+                                                      choices = levels(factor(bodiesNew$Karts)),
+                                                      selected = "Standard Kart"),
+                                       selectizeInput(inputId = "wheelselect",
+                                                      label = "Choose Wheels",
+                                                      choices = levels(factor(tiresNew$Tires)),
+                                                      selected = "Standard"),
+                                       selectizeInput(inputId = "gliderselect",
+                                                      label = "Choose a Glider",
+                                                      choices = levels(factor(glidersNew$Gliders)),
+                                                      selected = "Super"),
+                                       h4("Total Statistics"), tableOutput("stattable")),
+                   column(9,
+                          plotOutput("statgraph")))),
+        tabPanel("Kart Statistics - Heat Map", plotOutput("heatmap"))
       )
 
-    ) 
-  )
+      )
+
+    )
+    
+
+  
 
 
 
@@ -97,10 +95,16 @@ server <- function(input, output, session) {
     tibble(worldrecords)
   })
   
-  output$tracks <- renderTable({
-    
+## Output for heatmap
+  output$heatmap <- renderPlot({
+    ggplot(display_table(), aes(x = Stats, y = Rating)) +
+      geom_tile()
   })
   
+## Output for Comparison
+  
+  
+
 ## Output which shows the current selection.
   output$combotable <- renderTable({
     tibble(new())},

@@ -72,3 +72,5 @@ Today I changed my shiny apps layout for the primary version I made. Now it stil
 My work included attempting to find a data frame which had all of the tracks from Mario Kart 8 and the track type, which I could not find so I began to build an excel file which has all of this data. I am almost completed this data set and will have it functional by the end of class today.
 
 ## After Class
+
+Today I worked on the Tracks data frame, but I also made a lot of progress in two new tabs I plan on adding. One will be a heat map, where you can select which part of the kart you want to see (Character, Tires, Wheels, Gliders), and the heat map will display all the statistics for each of the options in these categories. I also am going to make a more specific one, where you can select both the part of the kart and the statistic. For example, Speed vs. Characters, and the output shows all the speed statistics for the characters. I have figured out how to create my data frame and complete both of these outputs.

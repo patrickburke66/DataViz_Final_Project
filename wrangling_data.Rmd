@@ -5,6 +5,10 @@ date: "3/21/2022"
 output: html_document
 ---
 
+        #(p("This is an app to test out different combinations for Mario Kart 8 deluxe. In this app, you can select your Character, Kart, Tires, and Glider on the left hand side. Each of our different tabs includes statistics and information about your selection. You can also navigate to the Random Kart selector. All Mario Kart statistics have a minimum of 0.75 and a maximum of 5.75. All of the characters begin with base statistics. Changing the Kart, Tires, or Glider changes can effect each of these statistics positively or negatively. Enjoy!")
+         #)
+
+
 ```{r}
 library(tidyverse)
 library(rvest)
@@ -76,6 +80,8 @@ finalstats <- finalstats %>%
               "Traction", "Mini.Turbo", 
               "Speed..Water.", "Speed..Air.", "Speed..Ground.", 
               "Handling..Water.", "Handling..Air.", "Handling.Ground.")
+
+write.csv(worldrecords, file = "worldrecords.csv")
 ```
 
 

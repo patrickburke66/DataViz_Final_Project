@@ -25,3 +25,7 @@ I talked with Grace about her project. Grace is doing a blog which is analyzing 
 ## April 18 
 
 I talked with Grace again about her project. First she talked about how she had spent a lot of time joining two data frames and making sure everything was accurately moving over. This was complicate because she had to change some variables to match case in the join. She also showed me a map she made and how she planned on adding colors based on certain variables, like a heat map.
+
+## April 25
+
+I talked to Johnathon about his project. He walked me through all of the different bloig posts and graphs he had, including one interactive shiny graph about bitcoin. He has a well thought out plan and detailed to me the different aspects of each idea he displayed.
