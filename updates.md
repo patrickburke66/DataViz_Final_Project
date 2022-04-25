@@ -65,3 +65,10 @@ Today I played around a lot with my shiny app. I got my table to display as I ha
 ## April 20
 
 Today I changed my shiny apps layout for the primary version I made. Now it still ahs the tab panel but also is constantly demonstrating the stats of the characters, no matter what tab you are on. I plan to spend this weekend finishing and adding tabs. Optimal tracks based on kart, head to head kart comparison, and random kart generator -- based on certain selected parameters.
+
+## April 25
+
+## Before class
+My work included attempting to find a data frame which had all of the tracks from Mario Kart 8 and the track type, which I could not find so I began to build an excel file which has all of this data. I am almost completed this data set and will have it functional by the end of class today.
+
+## After Class

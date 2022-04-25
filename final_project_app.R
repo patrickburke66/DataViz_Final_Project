@@ -97,6 +97,10 @@ server <- function(input, output, session) {
     tibble(worldrecords)
   })
   
+  output$tracks <- renderTable({
+    
+  })
+  
 ## Output which shows the current selection.
   output$combotable <- renderTable({
     tibble(new())},
