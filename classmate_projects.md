@@ -29,3 +29,7 @@ I talked with Grace again about her project. First she talked about how she had 
 ## April 25
 
 I talked to Johnathon about his project. He walked me through all of the different bloig posts and graphs he had, including one interactive shiny graph about bitcoin. He has a well thought out plan and detailed to me the different aspects of each idea he displayed.
+
+## April 27
+
+I talked with Lily about her blogdown project. Thus far she has 2 blog posts, and a 3rd in progress. She was talking about how she wants to work more on two of the posts to make them nice, as one of them has many graphs but needs a little bit of preparation work, while another needs both graphs created and presentation work.

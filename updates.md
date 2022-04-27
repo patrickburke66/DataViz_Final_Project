@@ -81,3 +81,7 @@ Today I worked on the Tracks data frame, but I also made a lot of progress in tw
 
 I began doing more work for the random Kart generator, which will generate combinations to use based of of a user input. I have created the tab panel and am now working on creating smaller dfs which adapt to the users input. I am deciding the levels I should choose to determine where the level of stats are. For example, if the user input wants a kart with good handling, I have to decide where the threshold of "good" handling is.
 
+## After Class
+
+Today in class I got a large amount done for the random generator. I have figured out how to shrink down my data sets based on the parameters chosen, now I just have to combine them and figure out how to select a random combination from the data sets that I have shrunk down. 
+

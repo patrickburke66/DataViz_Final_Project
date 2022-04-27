@@ -52,34 +52,70 @@ glidersNew <- glidersNew %>%
   subset(select = (-c(2)))
 
 charactersNew <- read_csv("characters.csv")
+```
 
+```{r}
+colnames(bodiesNew)<- c("Type", "TotalSpeed","WaterSpeed", "AirSpeed",
+                        "GroundSpeed", "Acceleration", "Weight", 
+                        "TotalHandling",
+                        "WaterHandling","AirHandling", "GroundHandling",
+                        "Traction","MiniTurbo","Karts")
 
+colnames(charactersNew)<- c("Class", "Character",
+                            "TotalSpeed","WaterSpeed", "AirSpeed",
+                        "GroundSpeed", "Acceleration", "Weight", 
+                        "TotalHandling", "WaterHandling","AirHandling",
+                        "GroundHandling",
+                        "Traction","MiniTurbo")
+
+colnames(glidersNew)<- c("Type", "TotalSpeed","WaterSpeed", "AirSpeed",
+                        "GroundSpeed", "Acceleration", "Weight", 
+                        "TotalHandling",
+                        "WaterHandling","AirHandling", "GroundHandling",
+                        "Traction","MiniTurbo", "Gliders")
+
+colnames(tiresNew)<- c("Type", "TotalSpeed","WaterSpeed", "AirSpeed",
+                        "GroundSpeed", "Acceleration", "Weight", 
+                        "TotalHandling",
+                        "WaterHandling","AirHandling", "GroundHandling",
+                        "Traction","MiniTurbo", "Tires")
+
+colnames(mkfullNew)<- c("Type", "TotalSpeed","WaterSpeed", "AirSpeed",
+                        "GroundSpeed", "Acceleration", "Weight", 
+                        "TotalHandling",
+                        "WaterHandling","AirHandling", "GroundHandling",
+                        "Traction","MiniTurbo","Karts", "Class",
+                        "Character", "Gliders", "Tires")
+```
+
+```{r}
 mkfullNew <- full_join(bodiesNew, charactersNew)
 mkfullNew <-full_join(mkfullNew, glidersNew)
 mkfullNew <- full_join(mkfullNew, tiresNew)
+```
 
+```{r}
 selected <- mkfullNew %>%
   filter(Karts == "Standard Kart" | Character == "Mario" |
          Gliders == "Super" | Tires == "Standard")
 
+
 finalstats <- data.frame(t(colSums(selected[2:13])))
   
 finalstats <- finalstats %>%
-  pivot_longer(cols = c(1:12), names_to = "Stats", values_to = "Rating") 
+  pivot_longer(cols = c(1:12), names_to = "Stats", values_to = "Rating")
+```
 
-colnames(mkfullNew)<- c("Type", "Total Speed","Water Speed", "Air Speed",
-                        "Ground Speed", "Acceleration", "Weight", "Total Handling",
-                        "Water Handling","Air Handling", "Ground Handling", "Traction",
-                        "Mini Turbo","Karts", "Class", "Character", "Gliders", "Tires")
-
+```{r}
 finalstats <- finalstats %>%
   mutate(Stats = as.factor(Stats))
 
 finalstats <- finalstats %>%
-  fct_relevel(.f = Stats, levels = "Speed", "Acceleration", "Weight", "Handling",
-              "Traction", "Mini.Turbo", 
-              "Speed..Water.", "Speed..Air.", "Speed..Ground.", 
-              "Handling..Water.", "Handling..Air.", "Handling.Ground.")
+  fct_relevel(.f = Stats, levels = "Speed", "Acceleration", 
+              "Weight", "Handling",
+              "Traction", "MiniTurbo", 
+              "SpeedWater", "SpeedAir", "SpeedGround", 
+              "HandlingWater", "HandlingAir", "HandlingGround")
 ```
 
 
@@ -101,4 +137,8 @@ ggplot(finalstats2, aes(x = Karts, y = Stats)) +
 
 ```
 
+#selector for class
+```{r}
+
+```
 

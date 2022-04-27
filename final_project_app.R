@@ -15,7 +15,7 @@ ui <- fluidPage(
         ##FIRST TAB  -  BASIC SELECT AND SHOW STATS
         tabPanel("Kart Statistics - Graph", 
                  fluidRow(
-                   ## COLUMN 1, Selecter
+                   ## COLUMN 1, Selector
                    column(3,
                           selectizeInput(inputId = "charselect",
                                                       label = "Choose a Character",
@@ -38,35 +38,39 @@ ui <- fluidPage(
                    column(9,
                           plotOutput("statgraph")))),
         ## TAB 2 - Heat Map of Statistics based on selection
-        tabPanel("Kart Statistics - Heat Map", 
-                 selectizeInput(inputId = "charselect",
-                                label = "Choose an Option to View",
-                                choices = levels(factor(charactersNew$Character)),
-                                selected = "Mario"),
-                 plotOutput("heatmap")),
+        tabPanel("Kart Statistics - Heat Map",
+                 fluidRow(
+                   column(3,
+                          selectizeInput(inputId = "charselect",
+                                         label = "Choose an Option to View",
+                                         choices = levels(factor(charactersNew$Character)),
+                                         selected = "Mario"),
+                          plotOutput("heatmap"))
+                   )
+                 ),
         tabPanel("Random Kart Generator",
-                 selectizeInput(inputId = "statselect",
-                                label = "Choose a Stat to Prioritize",
-                                choices = levels(factor(finalstats$Stats)),
-                                selected = "Speed"),
-                 selectizeInput(inputId = "statselect",
-                                label = "Choose a Stat to Prioritize",
-                                choices = levels(factor(finalstats$Stats)),
-                                selected = "Speed"),
-                 selectizeInput(inputId = "statselect",
-                                label = "Choose a Stat to Prioritize",
-                                choices = levels(factor(finalstats$Stats)),
-                                selected = "Speed"))
+                 fluidRow(
+                   column(3,                  
+                          ## Selecter of Parameters
+                          selectizeInput(inputId = "charsizeselect",
+                                         label = "Choose a Character Size",
+                                         choices = levels(factor(charactersNew$Class)),
+                                         selected = "Light"),
+                          selectizeInput(inputId = "bikekartselect",
+                                         label = "Choose a Vehicle Type",
+                                         choices = levels(factor(bodiesNew$Type)),
+                                         selected = "Bike"),
+                          selectizeInput(inputId = "statselect",
+                                         label = "Choose a Stat to Prioritize",
+                                         choices = levels(factor(finalstats$Stats)),
+                                         selected = "Speed")),
+                   column(9,
+                          tableOutput("randomtable")))
+              )
       )
-
-      )
-
-    )
+  )
+)
     
-
-  
-
-
 
 server <- function(input, output, session) {
   
@@ -91,6 +95,29 @@ server <- function(input, output, session) {
   
   display_table <- reactive({ finalstats() %>%
     pivot_longer(cols = c(1:12), names_to = "Stats", values_to = "Rating") 
+  })
+  
+  ##Create df for the selected options
+  
+  randomchar <- reactive({
+    charactersNew %>%
+    filter(Class == input$charsizeselect)%>%
+    select(input$statselect, Character)%>%
+    arrange(desc(input$statselect)) %>% 
+    slice(1:5)
+  })
+  randomkart <- reactive({
+    bodiesNew %>%
+    filter(Type == input$bikekartselect) %>%
+    select(input$statselect, Karts)%>%
+    arrange(desc(input$statselect)) %>% 
+    slice(1:5)
+  })
+
+  
+## output for random generator
+  output$randomtable <- renderTable({
+    tibble(randomchar())
   })
   
 ## Output for images.
@@ -125,7 +152,7 @@ server <- function(input, output, session) {
   })
   
 ## Output for Comparison
-  
+
   
 
 ## Output which shows the current selection.
