@@ -74,3 +74,10 @@ My work included attempting to find a data frame which had all of the tracks fro
 ## After Class
 
 Today I worked on the Tracks data frame, but I also made a lot of progress in two new tabs I plan on adding. One will be a heat map, where you can select which part of the kart you want to see (Character, Tires, Wheels, Gliders), and the heat map will display all the statistics for each of the options in these categories. I also am going to make a more specific one, where you can select both the part of the kart and the statistic. For example, Speed vs. Characters, and the output shows all the speed statistics for the characters. I have figured out how to create my data frame and complete both of these outputs.
+
+## April 27
+
+## Before Class
+
+I began doing more work for the random Kart generator, which will generate combinations to use based of of a user input. I have created the tab panel and am now working on creating smaller dfs which adapt to the users input. I am deciding the levels I should choose to determine where the level of stats are. For example, if the user input wants a kart with good handling, I have to decide where the threshold of "good" handling is.
+

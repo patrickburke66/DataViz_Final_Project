@@ -11,8 +11,11 @@ ui <- fluidPage(
     mainPanel(
       ## The output of the table to the center of the app.
       tabsetPanel(
+        
+        ##FIRST TAB  -  BASIC SELECT AND SHOW STATS
         tabPanel("Kart Statistics - Graph", 
                  fluidRow(
+                   ## COLUMN 1, Selecter
                    column(3,
                           selectizeInput(inputId = "charselect",
                                                       label = "Choose a Character",
@@ -31,9 +34,29 @@ ui <- fluidPage(
                                                       choices = levels(factor(glidersNew$Gliders)),
                                                       selected = "Super"),
                                        h4("Total Statistics"), tableOutput("stattable")),
+                   ## COLUMN 2 - Graph
                    column(9,
                           plotOutput("statgraph")))),
-        tabPanel("Kart Statistics - Heat Map", plotOutput("heatmap"))
+        ## TAB 2 - Heat Map of Statistics based on selection
+        tabPanel("Kart Statistics - Heat Map", 
+                 selectizeInput(inputId = "charselect",
+                                label = "Choose an Option to View",
+                                choices = levels(factor(charactersNew$Character)),
+                                selected = "Mario"),
+                 plotOutput("heatmap")),
+        tabPanel("Random Kart Generator",
+                 selectizeInput(inputId = "statselect",
+                                label = "Choose a Stat to Prioritize",
+                                choices = levels(factor(finalstats$Stats)),
+                                selected = "Speed"),
+                 selectizeInput(inputId = "statselect",
+                                label = "Choose a Stat to Prioritize",
+                                choices = levels(factor(finalstats$Stats)),
+                                selected = "Speed"),
+                 selectizeInput(inputId = "statselect",
+                                label = "Choose a Stat to Prioritize",
+                                choices = levels(factor(finalstats$Stats)),
+                                selected = "Speed"))
       )
 
       )
@@ -97,7 +120,7 @@ server <- function(input, output, session) {
   
 ## Output for heatmap
   output$heatmap <- renderPlot({
-    ggplot(display_table(), aes(x = Stats, y = Rating)) +
+    ggplot(bodiesNew, aes(x = , y = Karts)) +
       geom_tile()
   })
   
