@@ -85,3 +85,11 @@ I began doing more work for the random Kart generator, which will generate combi
 
 Today in class I got a large amount done for the random generator. I have figured out how to shrink down my data sets based on the parameters chosen, now I just have to combine them and figure out how to select a random combination from the data sets that I have shrunk down. 
 
+## May 2
+
+## Before Class
+
+Before class I worked a lot on my Heat Map tab. I worked on this and made the heat maps for different potential options. I made all of these heat maps in the `wrangling_data.rmd` file that I have been using to test code and read in the data for my Shiny app. I am going to spend today transitioning this work from `wrangling_data.rmd` over to my Shiny app and have it functional. 
+
+
+

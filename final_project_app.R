@@ -40,8 +40,8 @@ ui <- fluidPage(
         ## TAB 2 - Heat Map of Statistics based on selection
         tabPanel("Kart Statistics - Heat Map",
                  fluidRow(
-                   column(3,
-                          selectizeInput(inputId = "charselect",
+                   column(12,
+                          selectizeInput(inputId = "charselect2",
                                          label = "Choose an Option to View",
                                          choices = levels(factor(charactersNew$Character)),
                                          selected = "Mario"),
@@ -113,7 +113,7 @@ server <- function(input, output, session) {
     arrange(desc(input$statselect)) %>% 
     slice(1:5)
   })
-
+''
   
 ## output for random generator
   output$randomtable <- renderTable({
@@ -147,8 +147,11 @@ server <- function(input, output, session) {
   
 ## Output for heatmap
   output$heatmap <- renderPlot({
-    ggplot(bodiesNew, aes(x = , y = Karts)) +
-      geom_tile()
+    ggplot(finalstatschars, aes(x = Character, y = Stats)) +
+      geom_tile(aes(fill = Rating), color = "white") +
+      theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +
+      geom_text(aes(label = Rating), color = "white", size = 2) +
+      scale_fill_gradient(low = "blue", high = "red")
   })
   
 ## Output for Comparison

@@ -116,20 +116,65 @@ finalstats <- finalstats %>%
               "Traction", "MiniTurbo", 
               "SpeedWater", "SpeedAir", "SpeedGround", 
               "HandlingWater", "HandlingAir", "HandlingGround")
+
+
+```
+
+```{r}
+## Simplifying Lights
+simplifiedchars <- mkfullNew %>%
+  filter(!is.na(Character))%>%
+  filter(!row_number() %in% c(1, 7, 3, 11, 9, 13, 12, 6))
+
+## Renaming Lights
+simplifiedchars <- simplifiedchars %>%
+  mutate(Character = ifelse(Character == "Baby Luigi", "BabyLuigi/BabyMario/LightMii", Character)) %>%
+  mutate(Character = ifelse(Character == "Baby Daisy", "BabyDaisy/BabyPeach", Character)) %>%
+  mutate(Character = ifelse(Character == "Koopa Troopa", "Koopa/Lakitu", Character)) %>%
+  mutate(Character = ifelse(Character == "Toad", "Toad/ShyGuy/Larry", Character)) %>%
+  mutate(Character = ifelse(Character == "Toadette", "Toadette/Wendy", Character)) %>%
+  mutate(Character = ifelse(Character == "Baby Rosalina", "BabyRosalina/Lemmy", Character))
+```
+
+```{r}
+## Simplifying Mediums
+simplifiedchars <- simplifiedchars %>%
+  filter(!row_number() %in% c(8, 7, 11, 13, 14))
+
+## Renaming Mediums
+simplifiedchars <- simplifiedchars %>%
+  mutate(Character = ifelse(Character == "Yoshi", "Yoshi/Daisy/Peach", Character)) %>%
+  mutate(Character = ifelse(Character == "Iggy Koopa", "Iggy/Luigi", Character)) %>%
+  mutate(Character = ifelse(Character == "Mario", "Mario/Ludwig/MediumMii", Character)) 
+```
+
+```{r}
+## Simplifying Heavies
+simplifiedchars <- simplifiedchars %>%
+  filter(!row_number() %in% c(10, 13, 17, 19, 14))
+
+## Renaming Heavies
+simplifiedchars <- simplifiedchars %>%
+  mutate(Character = ifelse(Character == "Waluigi", "Waluigi/DK/Roy", Character)) %>%
+  mutate(Character = ifelse(Character == "Morton Koopa", "Bowser/Morton/HeavyMii", Character)) %>%
+  mutate(Character = ifelse(Character == "Pink Gold Peach", "PinkGoldPeach/MetalMario", Character)) 
 ```
 
 
+
+## KARTS HEAT MAP
 ```{r}
-selected2 <- mkfullNew %>%
-  filter(!is.na(Karts))
+selectedkarts <- mkfullNew %>%
+  filter(!is.na(Karts))%>% 
+  select(-c(3, 4, 5 ,9, 10, 11))
 
-finalstats2 <- selected2 %>%
-  pivot_longer(cols = c(2:13), names_to = "Stats", values_to = "Rating") 
+finalstatskarts <- selectedkarts %>%
+  pivot_longer(cols = c(2:7), names_to = "Stats", values_to = "Rating")
 
-finalstats2 <- finalstats2 %>%
+finalstatskarts <- finalstatskarts %>%
   select("Karts", "Stats", "Rating")
 
-ggplot(finalstats2, aes(x = Karts, y = Stats)) +
+ggplot(finalstatskarts, aes(x = Karts, y = Stats)) +
   geom_tile(aes(fill = Rating), color = "white") +
   theme(axis.text.x = element_text(angle = 90)) +
   geom_text(aes(label = Rating), color = "white", size = 2) +
@@ -137,8 +182,22 @@ ggplot(finalstats2, aes(x = Karts, y = Stats)) +
 
 ```
 
-#selector for class
+## CHARS HEAT MAP
 ```{r}
+selectedchars <- simplifiedchars %>%
+  select(-c(3,4,5,9,10,11))
+
+finalstatschars <- selectedchars %>%
+  pivot_longer(cols = c(2:7), names_to = "Stats", values_to = "Rating") 
+
+finalstatschars <- finalstatschars %>%
+  select("Character", "Stats", "Rating")
+
+ggplot(finalstatschars, aes(x = Character, y = Stats)) +
+  geom_tile(aes(fill = Rating), color = "white") +
+  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +
+  geom_text(aes(label = Rating), color = "white", size = 2) +
+  scale_fill_gradient(low = "blue", high = "red")
 
 ```
 
