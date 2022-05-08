@@ -173,13 +173,6 @@ finalstatskarts <- selectedkarts %>%
 
 finalstatskarts <- finalstatskarts %>%
   select("Karts", "Stats", "Rating")
-
-ggplot(finalstatskarts, aes(x = Karts, y = Stats)) +
-  geom_tile(aes(fill = Rating), color = "white") +
-  theme(axis.text.x = element_text(angle = 90)) +
-  geom_text(aes(label = Rating), color = "white", size = 2) +
-  scale_fill_gradient(low = "blue", high = "red")
-
 ```
 
 ## CHARS HEAT MAP
@@ -192,12 +185,81 @@ finalstatschars <- selectedchars %>%
 
 finalstatschars <- finalstatschars %>%
   select("Character", "Stats", "Rating")
-
-ggplot(finalstatschars, aes(x = Character, y = Stats)) +
-  geom_tile(aes(fill = Rating), color = "white") +
-  theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)) +
-  geom_text(aes(label = Rating), color = "white", size = 2) +
-  scale_fill_gradient(low = "blue", high = "red")
-
 ```
+
+## Sizes Heat Map
+
+```{r}
+selectedsize <- mkfullNew %>%
+  filter(!is.na(Class))%>% 
+  select(-c(3, 4, 5 ,9, 10, 11))
+
+finalstatssize <- selectedsize %>%
+  pivot_longer(cols = c(2:7), names_to = "Stats", values_to = "Rating")
+
+finalstatssize <- finalstatssize %>%
+  select("Class", "Stats", "Rating")
+
+finalstatssize <- finalstatssize %>%
+  group_by(Class, Stats) %>%
+  summarise(Rating = round(mean(Rating), 2))
+```
+
+## TIRE HEAT MAP
+```{r}
+selectedtire <- mkfullNew %>%
+  filter(!is.na(Tires))%>% 
+  select(-c(3, 4, 5 ,9, 10, 11))
+
+finalstatstire <- selectedtire %>%
+  pivot_longer(cols = c(2:7), names_to = "Stats", values_to = "Rating")
+
+finalstatstire <- finalstatstire %>%
+  select("Tires", "Stats", "Rating")
+```
+
+## GLIDER HEAT MAP
+```{r}
+selectedglider <- mkfullNew %>%
+  filter(!is.na(Gliders))%>% 
+  select(-c(3, 4, 5 ,9, 10, 11))
+
+finalstatsglider <- selectedglider %>%
+  pivot_longer(cols = c(2:7), names_to = "Stats", values_to = "Rating")
+
+finalstatsglider <- finalstatsglider %>%
+  select("Gliders", "Stats", "Rating")
+```
+
+
+```{r}
+col1 <- c("Type", "Tires", "Glider", "Characters", "Karts")
+options <- data.frame(col1)
+```
+
+
+```{r}
+bodiesNew <- bodiesNew %>%
+  relocate(Karts, .before = Type)
+
+charactersNew <- charactersNew %>%
+  relocate(Character, .before = Class)
+
+glidersNew <- glidersNew %>%
+  relocate(Gliders, .before = Type)
+
+tiresNew <- tiresNew %>%
+    select(-Type)
+    
+tiresNew <- tiresNew %>%
+  relocate(Tires, .before = TotalSpeed)
+```
+
+```{r}
+finalstatsbasic <- finalstats %>%
+  filter(!row_number() %in% c(2, 3, 4, 8, 9, 10))
+```
+
+
+
 
