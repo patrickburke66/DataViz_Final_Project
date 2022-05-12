@@ -179,6 +179,107 @@ ui <- fluidPage(theme = shinytheme("united"),
 
 server <- function(input, output, session) {
   
+  bodiesNew <- read_csv("bodies.csv")
+  bodiesNew <- bodiesNew %>%
+    mutate(Karts = Body) %>%
+    subset(select = (-c(2)))
+  
+  
+  tiresNew <- read_csv("tires.csv")
+  tiresNew <- tiresNew %>%
+    mutate(Tires = Body) %>%
+    subset(select = (-c(2)))
+  
+  glidersNew <- read_csv("gliders.csv")
+  glidersNew <- glidersNew %>%
+    mutate(Gliders = Body) %>%
+    subset(select = (-c(2)))
+  
+  charactersNew <- read_csv("characters.csv")
+  
+  colnames(bodiesNew)<- c("Type", "TotalSpeed","WaterSpeed", "AirSpeed",
+                          "GroundSpeed", "Acceleration", "Weight", 
+                          "TotalHandling",
+                          "WaterHandling","AirHandling", "GroundHandling",
+                          "Traction","MiniTurbo","Karts")
+  
+  colnames(charactersNew)<- c("Class", "Character",
+                              "TotalSpeed","WaterSpeed", "AirSpeed",
+                              "GroundSpeed", "Acceleration", "Weight", 
+                              "TotalHandling", "WaterHandling","AirHandling",
+                              "GroundHandling",
+                              "Traction","MiniTurbo")
+  
+  colnames(glidersNew)<- c("Type", "TotalSpeed","WaterSpeed", "AirSpeed",
+                           "GroundSpeed", "Acceleration", "Weight", 
+                           "TotalHandling",
+                           "WaterHandling","AirHandling", "GroundHandling",
+                           "Traction","MiniTurbo", "Gliders")
+  
+  colnames(tiresNew)<- c("Type", "TotalSpeed","WaterSpeed", "AirSpeed",
+                         "GroundSpeed", "Acceleration", "Weight", 
+                         "TotalHandling",
+                         "WaterHandling","AirHandling", "GroundHandling",
+                         "Traction","MiniTurbo", "Tires")
+  
+  colnames(mkfullNew)<- c("Type", "TotalSpeed","WaterSpeed", "AirSpeed",
+                          "GroundSpeed", "Acceleration", "Weight", 
+                          "TotalHandling",
+                          "WaterHandling","AirHandling", "GroundHandling",
+                          "Traction","MiniTurbo","Karts", "Class",
+                          "Character", "Gliders", "Tires")
+  
+  mkfullNew <- full_join(bodiesNew, charactersNew)
+  mkfullNew <-full_join(mkfullNew, glidersNew)
+  mkfullNew <- full_join(mkfullNew, tiresNew)
+  
+  ## Simplifying Lights
+  simplifiedchars <- mkfullNew %>%
+    filter(!is.na(Character))%>%
+    filter(!row_number() %in% c(1, 7, 3, 11, 9, 13, 12, 6))
+  
+  ## Renaming Lights
+  simplifiedchars <- simplifiedchars %>%
+    mutate(Character = ifelse(Character == "Baby Luigi", "BabyLuigi/BabyMario/LightMii", Character)) %>%
+    mutate(Character = ifelse(Character == "Baby Daisy", "BabyDaisy/BabyPeach", Character)) %>%
+    mutate(Character = ifelse(Character == "Koopa Troopa", "Koopa/Lakitu", Character)) %>%
+    mutate(Character = ifelse(Character == "Toad", "Toad/ShyGuy/Larry", Character)) %>%
+    mutate(Character = ifelse(Character == "Toadette", "Toadette/Wendy", Character)) %>%
+    mutate(Character = ifelse(Character == "Baby Rosalina", "BabyRosalina/Lemmy", Character))
+  
+  simplifiedchars <- simplifiedchars %>%
+    filter(!row_number() %in% c(8, 7, 11, 13, 14))
+  
+  simplifiedchars <- simplifiedchars %>%
+    mutate(Character = ifelse(Character == "Yoshi", "Yoshi/Daisy/Peach", Character)) %>%
+    mutate(Character = ifelse(Character == "Iggy Koopa", "Iggy/Luigi", Character)) %>%
+    mutate(Character = ifelse(Character == "Mario", "Mario/Ludwig/MediumMii", Character))
+  
+  simplifiedchars <- simplifiedchars %>%
+    filter(!row_number() %in% c(10, 13, 17, 19, 14))
+  
+  simplifiedchars <- simplifiedchars %>%
+    mutate(Character = ifelse(Character == "Waluigi", "Waluigi/DK/Roy", Character)) %>%
+    mutate(Character = ifelse(Character == "Morton Koopa", "Bowser/Morton/HeavyMii", Character)) %>%
+    mutate(Character = ifelse(Character == "Pink Gold Peach", "PinkGoldPeach/MetalMario", Character)) 
+  
+  col1 <- c("Type", "Tires", "Glider", "Characters", "Karts")
+  options <- data.frame(col1)
+  
+  bodiesNew <- bodiesNew %>%
+    relocate(Karts, .before = Type)
+  
+  charactersNew <- charactersNew %>%
+    relocate(Character, .before = Class)
+  
+  glidersNew <- glidersNew %>%
+    relocate(Gliders, .before = Type)
+  
+  tiresNew <- tiresNew %>%
+    select(-Type)
+  
+  tiresNew <- tiresNew %>%
+    relocate(Tires, .before = TotalSpeed)
 
 # SUMMARY STATISTIC DF MAKING
   ## Create a reactive df of the current selection for statistics.
